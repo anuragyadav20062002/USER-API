@@ -77,7 +77,7 @@ app
   })
 
   .put(function (req, res) {
-    /////To update the username and name of any pre-existing user//
+    /////To update the username and name of any pre-existing user except its password//
 
     User.replaceOne(
       {
@@ -98,6 +98,15 @@ app
         }
       }
     )
+  })
+  .delete(function (req, res) {
+    User.deleteOne({ name: req.params.name }, function (err) {
+      if (!err) {
+        res.send("deleted successfully")
+      } else {
+        res.send("cant delete user")
+      }
+    })
   })
 
 //Listening//

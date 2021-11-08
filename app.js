@@ -80,23 +80,17 @@ app
     )
   })
 
-  .put(function (req, res) {
-    /////To update the username and name of any pre-existing user except its password//
-
+  .patch(function (req, res) {
     User.replaceOne(
       {
         name: req.params.name,
       },
       {
-        name: req.body.name,
-        username: req.body.username,
-      },
-      {
-        overwrite: true,
+        $set: req.body,
       },
       function (err) {
         if (!err) {
-          res.send("Updated user details successfully")
+          res.send("Updated user successfully")
         } else {
           res.send("Cant update user")
         }

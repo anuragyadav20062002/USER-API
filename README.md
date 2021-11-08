@@ -21,3 +21,13 @@ Restful API
 4. Then we have an user with name anurag and we are updating its details using patch but after updation we can see that the password reamins the same
 
 <img src="images/6.png">
+
+5. Updated the users as follows to show delete function by delete request
+
+<img src="images/7.png">
+
+6. Now using delete request user with anurag is being deleted and we can see it by using get request as shown
+
+<img src="images/8.png">
+
+<img src="images/9.png">

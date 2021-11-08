@@ -12,14 +12,14 @@ app.use(express.static("public"))
 
 mongoose.connect("mongodb://localhost:27017/usersDB", { useNewUrlParser: true })
 
-const userSchema = {
+const userSchema = new mongoose.Schema({
   name: String,
   username: String,
   password: {
     type: String,
     immutable: true,
   },
-}
+})
 
 const User = mongoose.model("User", userSchema)
 
@@ -86,13 +86,14 @@ app
         name: req.params.name,
       },
       {
-        $set: req.body,
+        name: req.body.name,
+        username: req.body.username,
       },
       function (err) {
         if (!err) {
           res.send("Updated user successfully")
         } else {
-          res.send("Cant update user")
+          res.send("Cant update")
         }
       }
     )

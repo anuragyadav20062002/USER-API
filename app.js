@@ -10,12 +10,15 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(express.static("public"))
 
-mongoose.connect("mongodb://localhost:27017/wikiDB", { useNewUrlParser: true })
+mongoose.connect("mongodb://localhost:27017/usersDB", { useNewUrlParser: true })
 
 const userSchema = {
   name: String,
   username: String,
-  password: String,
+  password: {
+    type: String,
+    immutable: true,
+  },
 }
 
 const User = mongoose.model("User", userSchema)
@@ -43,6 +46,7 @@ app
     newuser.save(function (err) {
       if (!err) {
         console.log("saved new user successfully")
+        res.send("saved user successfully")
       }
     })
   })

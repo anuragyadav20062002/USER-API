@@ -81,13 +81,12 @@ app
   })
 
   .patch(function (req, res) {
-    User.replaceOne(
+    User.updateOne(
       {
         name: req.params.name,
       },
       {
-        name: req.body.name,
-        username: req.body.username,
+        $set: req.body,
       },
       function (err) {
         if (!err) {

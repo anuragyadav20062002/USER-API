@@ -54,7 +54,22 @@ app
     })
   })
 
-/////////////
+/////////////Requesting Particlar User///////
+
+app.route("/user/:name").get(function (req, res) {
+  User.findOne(
+    {
+      name: req.params.name,
+    },
+    function (err, founduser) {
+      if (founduser) {
+        res.send(founduser)
+      } else {
+        res.send("No matching user found")
+      }
+    }
+  )
+})
 
 //Listening//
 

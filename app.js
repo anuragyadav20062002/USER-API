@@ -46,6 +46,15 @@ app
       }
     })
   })
+  .delete(function (req, res) {
+    User.deleteMany(function (err) {
+      if (!err) {
+        console.log("Successfully deleted user")
+      }
+    })
+  })
+
+/////////////
 
 //Listening//
 

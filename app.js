@@ -56,20 +56,49 @@ app
 
 /////////////Requesting Particlar User///////
 
-app.route("/user/:name").get(function (req, res) {
-  User.findOne(
-    {
-      name: req.params.name,
-    },
-    function (err, founduser) {
-      if (founduser) {
-        res.send(founduser)
-      } else {
-        res.send("No matching user found")
+app
+  .route("/user/:name")
+
+  .get(function (req, res) {
+    /////To find a single user if it exists and read its details/////
+
+    User.findOne(
+      {
+        name: req.params.name,
+      },
+      function (err, founduser) {
+        if (founduser) {
+          res.send(founduser)
+        } else {
+          res.send("No matching user found")
+        }
       }
-    }
-  )
-})
+    )
+  })
+
+  .put(function (req, res) {
+    /////To update the username and name of any pre-existing user//
+
+    User.replaceOne(
+      {
+        name: req.params.name,
+      },
+      {
+        name: req.body.name,
+        username: req.body.username,
+      },
+      {
+        overwrite: true,
+      },
+      function (err) {
+        if (!err) {
+          res.send("Updated user details successfully")
+        } else {
+          res.send("Cant update user")
+        }
+      }
+    )
+  })
 
 //Listening//
 
